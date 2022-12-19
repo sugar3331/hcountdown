@@ -1,8 +1,8 @@
 package main
 
 import (
-	"hcountdown/reptile"
-	"hcountdown/schedule"
+	"github.com/sugar3331/hcountdown/reptile"
+	"github.com/sugar3331/hcountdown/schedule"
 	"time"
 )
 
