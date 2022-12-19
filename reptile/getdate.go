@@ -21,9 +21,10 @@ func init() {
 	ctf = deepSource(url, yearStr)
 }
 
-func GetNear(t time.Time) {
+func GetNear(t time.Time) (str string, n int) {
 	year := t.Year()
-	judge(t, year, ctf)
+	str, n = judge(t, year, ctf)
+	return str, n
 }
 
 //先在官方网站中爬取全部数据,返回需要的url
@@ -100,7 +101,7 @@ func deepSource(url, yearStr string) map[string]string {
 }
 
 //逻辑判断距离最近节假日还有多少天
-func judge(t time.Time, year int, ctf map[string]string) {
+func judge(t time.Time, year int, ctf map[string]string) (str string, n int) {
 	mlt := 367
 	mlf := "元旦"
 	t5, _ := time.Parse("2006年1月2日", "2022年9月11日") //判定时间
@@ -112,7 +113,8 @@ func judge(t time.Time, year int, ctf map[string]string) {
 		d2 := t6.Sub(t)
 		tt1 := time.Duration.Hours(d2)
 		ls1 := int(tt1 / 24)
-		fmt.Println("距离最近的节日：元旦，还有", ls1+1, "天")
+		str = mlf
+		n = ls1 + 1
 	} else {
 		for kl := range ctf {
 			s4 := ctf[kl]
@@ -129,6 +131,8 @@ func judge(t time.Time, year int, ctf map[string]string) {
 				}
 			}
 		}
-		fmt.Println("距离最近的节日：", mlf, "，还有：", mlt+1, "天")
+		str = mlf
+		n = mlt + 1
 	}
+	return str, n
 }

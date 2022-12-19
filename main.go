@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/sugar3331/hcountdown/reptile"
 	"github.com/sugar3331/hcountdown/schedule"
 	"time"
@@ -10,7 +11,8 @@ func main() {
 	//现在的时间
 	nt := time.Now()
 	//显示距离最近的节日
-	reptile.GetNear(nt)
+	fes, day := reptile.GetNear(nt)
+	fmt.Println("距离现在最近的节日是：", fes, "剩余天数为：", day)
 
 	rm := "freetime"                                //添加的日程名字
 	rt, _ := time.Parse("2006年1月2日", "2022年12月18日") //添加的日程时间
